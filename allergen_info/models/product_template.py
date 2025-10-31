@@ -39,7 +39,9 @@ class ProductTemplate(models.Model):
         If there are multiple variants, this is a no-op as each variant should
         be edited individually.
         """
-        for template in self:
-            if len(template.product_variant_ids) == 1:
-                template.product_variant_ids.allergen_ids = template.allergen_ids
+        single_variant_templates = self.filtered(
+            lambda t: len(t.product_variant_ids) == 1
+        )
+        for template in single_variant_templates:
+            template.product_variant_ids.allergen_ids = template.allergen_ids
 

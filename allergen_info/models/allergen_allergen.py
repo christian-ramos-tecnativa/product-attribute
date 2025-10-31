@@ -11,10 +11,3 @@ class AllergenAllergen(models.Model):
     name = fields.Char(required=True, translate=True)
     image = fields.Image(string="Icon", max_width=128, max_height=128)
 
-    _sql_constraints = [
-        (
-            "name_uniq",
-            "unique(name)",
-            "Allergen name already exists",
-        )
-    ]
