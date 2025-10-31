@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!-- Tree View for Allergen -->
+    <record id="view_allergen_allergen_tree" model="ir.ui.view">
+        <field name="name">allergen.allergen.tree</field>
+        <field name="model">allergen.allergen</field>
+        <field name="arch" type="xml">
+            <tree string="Allergens">
+                <field name="image" widget="image" width="50"/>
+                <field name="name"/>
+            </tree>
+        </field>
+    </record>
+
+    <!-- Form View for Allergen -->
+    <record id="view_allergen_allergen_form" model="ir.ui.view">
+        <field name="name">allergen.allergen.form</field>
+        <field name="model">allergen.allergen</field>
+        <field name="arch" type="xml">
+            <form string="Allergen">
+                <sheet>
+                    <field name="image" widget="image" class="oe_avatar"/>
+                    <group>
+                        <field name="name"/>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <!-- Action for Allergen -->
+    <record id="action_allergen_allergen" model="ir.actions.act_window">
+        <field name="name">Allergens</field>
+        <field name="res_model">allergen.allergen</field>
+        <field name="view_mode">tree,form</field>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">
+                Create your first allergen
+            </p>
+            <p>
+                Define allergens that can be associated with products.
+            </p>
+        </field>
+    </record>
+
+    <!-- Menu Item for Allergen -->
+    <menuitem
+        id="menu_allergen_allergen"
+        name="Allergens"
+        parent="product.prod_config_main"
+        action="action_allergen_allergen"
+        sequence="20"
+    />
+</odoo>

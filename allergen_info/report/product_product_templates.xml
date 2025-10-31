@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!-- Extend the product label report template -->
+    <template id="report_producttemplatelabel" inherit_id="product.report_producttemplatelabel">
+        <xpath expr="//t[@t-foreach='docs']//div[hasclass('col-3')]" position="after">
+            <t t-if="env['ir.config_parameter'].sudo().get_param('allergen_info.show_allergens_on_product_labels')">
+                <t t-if="product.allergen_ids">
+                    <div class="row mt-1">
+                        <div class="col-12 text-center">
+                            <t t-foreach="product.allergen_ids" t-as="allergen">
+                                <img t-if="allergen.image" 
+                                     t-att-src="'data:image/png;base64,%s' % allergen.image.decode('utf-8')"
+                                     style="max-width: 24px; max-height: 24px; margin: 2px;"
+                                     t-att-title="allergen.name"
+                                     t-att-alt="allergen.name"/>
+                            </t>
+                        </div>
+                    </div>
+                </t>
+            </t>
+        </xpath>
+    </template>
+</odoo>

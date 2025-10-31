@@ -1,0 +1,10 @@
+[project]
+name = "odoo-addon-allergen_info"
+dynamic = ["version"]
+
+[build-system]
+requires = ["whool"]
+build-backend = "whool.buildapi"
+
+[tool.whool]
+version = "18.0.1.0.0"
