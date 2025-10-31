@@ -1,20 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
 <odoo>
-    <!-- Extend the product label report template -->
+    <!-- Extend the product label report template to show allergens -->
     <template id="report_producttemplatelabel" inherit_id="product.report_producttemplatelabel">
-        <xpath expr="//t[@t-foreach='docs']//div[hasclass('col-3')]" position="after">
+        <!-- Add allergens at the bottom of the label content, inside the label's main div -->
+        <xpath expr="//div[contains(@class, 'text-center')]/strong" position="after">
             <t t-if="env['ir.config_parameter'].sudo().get_param('allergen_info.show_allergens_on_product_labels')">
                 <t t-if="product.allergen_ids">
-                    <div class="row mt-1">
-                        <div class="col-12 text-center">
-                            <t t-foreach="product.allergen_ids" t-as="allergen">
-                                <img t-if="allergen.image" 
-                                     t-att-src="'data:image/png;base64,%s' % allergen.image.decode('utf-8')"
-                                     style="max-width: 24px; max-height: 24px; margin: 2px;"
-                                     t-att-title="allergen.name"
-                                     t-att-alt="allergen.name"/>
-                            </t>
-                        </div>
+                    <div style="margin-top: 4px;">
+                        <t t-foreach="product.allergen_ids" t-as="allergen">
+                            <img t-if="allergen.image" 
+                                 t-att-src="image_data_uri(allergen.image)"
+                                 style="max-width: 18px; max-height: 18px; margin: 1px; display: inline-block;"
+                                 t-att-title="allergen.name"
+                                 t-att-alt="allergen.name"/>
+                        </t>
                     </div>
                 </t>
             </t>

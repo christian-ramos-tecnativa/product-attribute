@@ -11,34 +11,35 @@ class ProductTemplate(models.Model):
         comodel_name="allergen.allergen",
         string="Allergens",
         compute="_compute_allergen_ids",
+        inverse="_inverse_allergen_ids",
         store=False,
-        readonly=False,
         help="Allergens present in this product template. "
-        "Note: Different variants may have different allergens.",
+        "When the template has a single variant, changes are applied to that variant. "
+        "When there are multiple variants, this shows the union of all variant allergens.",
     )
 
     @api.depends("product_variant_ids.allergen_ids")
     def _compute_allergen_ids(self):
         """Compute allergens from variants.
         
-        If all variants have the same allergens, show those allergens.
-        If variants have different allergens, show the union of all allergens.
+        Shows the union of allergens from all variants.
         """
         for template in self:
             if template.product_variant_ids:
-                # Get allergens from all variants
+                # Get all unique allergens from all variants
                 all_allergens = template.product_variant_ids.mapped("allergen_ids")
                 template.allergen_ids = all_allergens
             else:
                 template.allergen_ids = False
 
-    def write(self, vals):
-        """Override write to propagate allergen changes to variants."""
-        res = super().write(vals)
-        if "allergen_ids" in vals and self.product_variant_ids:
-            # Only update variants if template has a single variant
-            # or if we want to propagate to all variants
-            for template in self:
-                if len(template.product_variant_ids) == 1:
-                    template.product_variant_ids.allergen_ids = template.allergen_ids
-        return res
+    def _inverse_allergen_ids(self):
+        """Apply allergen changes to variants.
+        
+        If the template has a single variant, apply changes to that variant.
+        If there are multiple variants, this is a no-op as each variant should
+        be edited individually.
+        """
+        for template in self:
+            if len(template.product_variant_ids) == 1:
+                template.product_variant_ids.allergen_ids = template.allergen_ids
+
