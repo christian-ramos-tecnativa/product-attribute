@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!-- Common allergens based on FDA and EU regulations (14 major allergens) -->
+<odoo noupdate="1">
+    <record id="allergen_gluten" model="allergen.allergen">
+        <field name="name">Gluten (Cereals containing gluten)</field>
+    </record>
+    <record id="allergen_crustaceans" model="allergen.allergen">
+        <field name="name">Crustaceans</field>
+    </record>
+    <record id="allergen_eggs" model="allergen.allergen">
+        <field name="name">Eggs</field>
+    </record>
+    <record id="allergen_fish" model="allergen.allergen">
+        <field name="name">Fish</field>
+    </record>
+    <record id="allergen_peanuts" model="allergen.allergen">
+        <field name="name">Peanuts</field>
+    </record>
+    <record id="allergen_soybeans" model="allergen.allergen">
+        <field name="name">Soybeans</field>
+    </record>
+    <record id="allergen_milk" model="allergen.allergen">
+        <field name="name">Milk</field>
+    </record>
+    <record id="allergen_tree_nuts" model="allergen.allergen">
+        <field name="name">Tree nuts</field>
+    </record>
+    <record id="allergen_celery" model="allergen.allergen">
+        <field name="name">Celery</field>
+    </record>
+    <record id="allergen_mustard" model="allergen.allergen">
+        <field name="name">Mustard</field>
+    </record>
+    <record id="allergen_sesame" model="allergen.allergen">
+        <field name="name">Sesame seeds</field>
+    </record>
+    <record id="allergen_sulphites" model="allergen.allergen">
+        <field name="name">Sulphur dioxide and sulphites</field>
+    </record>
+    <record id="allergen_lupin" model="allergen.allergen">
+        <field name="name">Lupin</field>
+    </record>
+    <record id="allergen_molluscs" model="allergen.allergen">
+        <field name="name">Molluscs</field>
+    </record>
+</odoo>

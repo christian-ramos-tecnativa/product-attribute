@@ -12,6 +12,7 @@
     "depends": ["product"],
     "data": [
         "security/ir.model.access.csv",
+        "data/allergen_data.xml",
         "views/allergen_allergen_views.xml",
         "views/product_views.xml",
         "views/res_config_settings_views.xml",
